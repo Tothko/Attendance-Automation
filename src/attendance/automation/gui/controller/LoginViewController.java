@@ -59,10 +59,10 @@ public class LoginViewController implements Initializable {
     }
 
     @FXML
-    private void loginMethod(ActionEvent event) throws DALException, IOException {
+    private void loginMethod(ActionEvent event) throws DALException, IOException, InterruptedException {
         String login = loginField.getText();
         String password = passwordField.getText();
-        System.out.println(manager.checkLogin(login, password));
+        Thread.sleep(200);
         if(manager.checkLogin(login, password)){
             manager.setUser();
             if(!manager.isTeacher()){
