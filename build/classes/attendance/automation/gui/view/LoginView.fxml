@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,16 +10,16 @@
 
 <AnchorPane fx:id="hroot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="320.0" style="-fx-background-radius: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.LoginViewController">
    <children>
-      <TextField layoutX="24.0" layoutY="35.0" prefHeight="${hroot.height*0.05}" prefWidth="${hroot.width*0.5}" style="-fx-background-radius: 36;" AnchorPane.leftAnchor="24.0" />
-      <TextField layoutX="24.0" layoutY="89.0" style="-fx-background-radius: 36;" AnchorPane.leftAnchor="24.0" />
+      <TextField fx:id="loginField" layoutX="24.0" layoutY="35.0" prefHeight="${hroot.height*0.05}" prefWidth="${hroot.width*0.5}" style="-fx-background-radius: 36;" AnchorPane.leftAnchor="24.0" />
       <Label layoutX="24.0" layoutY="14.0" text="Name:" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="14.0" />
       <Label layoutX="24.0" layoutY="66.0" text="Password:" AnchorPane.leftAnchor="24.0" />
-      <Button layoutX="235.0" layoutY="188.0" mnemonicParsing="false" style="-fx-background-radius: 36;" text="Login" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="28.0" />
+      <Button layoutX="235.0" layoutY="188.0" mnemonicParsing="false" onAction="#loginMethod" style="-fx-background-radius: 36;" text="Login" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="28.0" />
       <ImageView fitHeight="83.0" fitWidth="187.0" layoutX="24.0" layoutY="120.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="120.0">
          <image>
             <Image url="@../../gui/images/easv-logo1.png" />
          </image>
       </ImageView>
       <Button layoutX="282.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeWindow" prefHeight="20.0" prefWidth="20.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: red;" />
+      <PasswordField fx:id="passwordField" layoutX="24.0" layoutY="90.0" style="-fx-background-radius: 36;" />
    </children>
 </AnchorPane>
