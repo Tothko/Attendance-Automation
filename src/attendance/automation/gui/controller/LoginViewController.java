@@ -7,6 +7,7 @@ package attendance.automation.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -19,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 public class LoginViewController implements Initializable {
 
     @FXML
-    private AnchorPane Ankorpain;
+    private AnchorPane hroot;
 
     /**
      * Initializes the controller class.
@@ -28,5 +29,10 @@ public class LoginViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void closeWindow(ActionEvent event) {
+        System.exit(0);
+    }
     
 }
