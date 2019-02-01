@@ -66,15 +66,16 @@ public class LoginViewController implements Initializable {
         if(manager.checkLogin(login, password)){
             manager.setUser();
             if(!manager.isTeacher()){
-                mainViewInitialization();}
+                studentMainViewInitialization();
+            }
         
         Stage stage2 = (Stage)loginField.getScene().getWindow();
         stage2.close();}
     }
     
-    private void mainViewInitialization() throws IOException{
+    private void studentMainViewInitialization() throws IOException{
         Parent root1;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/MainView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/StudentMainView.fxml"));
         root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);

@@ -8,8 +8,14 @@ package attendance.automation.bll;
 import attendance.automation.be.Student;
 import attendance.automation.be.Teacher;
 import attendance.automation.dal.DALException;
+import attendance.automation.dal.DateDAO;
 import attendance.automation.dal.UserDAO;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import static java.time.temporal.TemporalQueries.localDate;
+import java.util.Date;
 
 /**
  *
@@ -17,12 +23,14 @@ import java.io.IOException;
  */
 public class AAManager {
     private UserDAO ud;
+    private DateDAO dd;
     private static AAManager manager;
     private Student st;
     private Teacher te;
     
     public AAManager() throws IOException{
         ud = new UserDAO();
+        dd = new DateDAO();
         st = null;
         te = null;
     }
@@ -57,5 +65,10 @@ public class AAManager {
     }
     public Teacher getTeacher(){
         return te;
+    }
+    public boolean markAttendance(int studentID) throws DALException{
+        LocalDate localDate = LocalDate.now();
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return dd.markAttendance(studentID, date);
     }
 }

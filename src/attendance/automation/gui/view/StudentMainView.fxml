@@ -6,9 +6,12 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.MainController">
+<AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.StudentMainViewController">
     <children>
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+        <Label fx:id="attendanceFeedback" layoutX="75.0" layoutY="386.0" minHeight="16" minWidth="69" prefHeight="84.0" prefWidth="307.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+         <font>
+            <Font size="27.0" />
+         </font></Label>
       <Label fx:id="welcomeLabel" layoutX="54.0" layoutY="14.0" prefHeight="66.0" prefWidth="812.0" text="Welcome, xyz">
          <font>
             <Font size="48.0" />
@@ -19,7 +22,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="dateLabel" layoutX="54.0" layoutY="96.0" prefHeight="70.0" prefWidth="389.0" text="Friday, 01.02.2019">
+      <Label fx:id="dateLabel" layoutX="54.0" layoutY="85.0" prefHeight="70.0" prefWidth="389.0" text="Friday, 01.02.2019">
          <font>
             <Font size="37.0" />
          </font>

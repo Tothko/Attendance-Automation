@@ -7,8 +7,10 @@ package attendance.automation.gui.controller;
 
 import attendance.automation.be.Student;
 import attendance.automation.bll.AAManager;
+import attendance.automation.dal.DALException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -23,33 +25,36 @@ import javafx.scene.control.Label;
  *
  * @author Tothko
  */
-public class MainController implements Initializable {
+public class StudentMainViewController implements Initializable {
     
-    @FXML
-    private Label label;
     @FXML
     private Label welcomeLabel;
     private AAManager manager;
     private Student st;
     @FXML
     private Label dateLabel;
+    @FXML
+    private Label attendanceFeedback;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             manager = AAManager.getInstance();
         } catch (IOException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         st = manager.getStudent();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	LocalDate localDate = LocalDate.now();
         welcomeLabel.setText("Welcome, "+st.getName()+". Have nice day!");
         dateLabel.setText(localDate.toString());
     }    
 
     @FXML
-    private void attendanceButton(ActionEvent event) {
+    private void attendanceButton(ActionEvent event) throws DALException {
+        if(manager.markAttendance(st.getId()))
+            attendanceFeedback.setText("Attendance marked successfully!");
+        else
+            attendanceFeedback.setText("Attendance already marked!");
     }
     
 }
