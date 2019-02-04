@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="attendance.automation.gui.controller.TeacherMainViewController">
+   <children>
+      <ListView layoutY="98.0" prefHeight="302.0" prefWidth="359.0" />
+      <AnchorPane layoutX="359.0" layoutY="205.0" prefHeight="194.0" prefWidth="234.0">
+         <children>
+            <Label alignment="CENTER" layoutX="57.0" layoutY="62.0" prefHeight="70.0" prefWidth="120.0" text="Calendar">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ComboBox layoutY="73.0" prefHeight="26.0" prefWidth="174.0" promptText="Sort by class" />
+      <ComboBox layoutX="185.0" layoutY="73.0" prefHeight="26.0" prefWidth="174.0" promptText="Sort by attendance" />
+      <AnchorPane layoutX="359.0" layoutY="73.0" prefHeight="132.0" prefWidth="234.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Label" />
+            <TextField layoutX="43.0" layoutY="85.0" />
+            <Label layoutX="43.0" layoutY="66.0" text="Search a student" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="68.0" layoutY="205.0" text="List of students">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
