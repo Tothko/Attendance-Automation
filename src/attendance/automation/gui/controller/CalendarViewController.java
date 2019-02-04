@@ -6,6 +6,10 @@
 package attendance.automation.gui.controller;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,15 +30,27 @@ public class CalendarViewController implements Initializable {
     private GridPane GridCalendar;
     @FXML
     private Label labelDate;
-    private int daysInMonth = 31;
+    private Date date = new Date();
     private int x = 0;
     private int y = 1;
+    private LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        labelDate.setText(localDate.getMonth()+"/"+localDate.getYear());
+        String someDay = (localDate.minusDays(localDate.getDayOfMonth()-1)).getDayOfWeek().toString();
         
-        for (int i = 1; i <= daysInMonth; ++i) 
-{
-    x++;
+        if(someDay.equals("MONDAY")) x += 0;
+        else if(someDay.equals("TUESDAY")) x += 1;
+        else if(someDay.equals("WEDNESDAY")) x += 2;
+        else if(someDay.equals("THURSDAY")) x += 3;
+        else if(someDay.equals("FRIDAY")) x += 4; 
+        else if(someDay.equals("SATURDAY")) x += 5;
+        else if(someDay.equals("SUNDAY"))  x += 6;
+        
+        for (int i = 1; i <= localDate.lengthOfMonth(); ++i) 
+{   
+    (localDate.minusDays(localDate.getDayOfMonth())).getDayOfWeek();
+    
     if(x==7){
         x=0;
         y++;
@@ -45,10 +61,11 @@ public class CalendarViewController implements Initializable {
     butt.setText(""+i);
     butt.setOnAction(new EventHandler<ActionEvent>() {
     @Override public void handle(ActionEvent e) {
-        System.out.println("Kuba is awesome guy!!!");
+           // TO DO CODE
     }
 });
     GridCalendar.add(butt, x, y);
+    x++;
 }
     }    
     
