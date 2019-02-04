@@ -33,7 +33,7 @@ public class UserDAO {
         te = null;
     }
      
-  public boolean checkLogin(String login, String password) throws DALException{
+  public boolean checkLogin(String login, String password) throws DALException, IOException{
     try (Connection con = cp.getConnection()) {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Teacher");

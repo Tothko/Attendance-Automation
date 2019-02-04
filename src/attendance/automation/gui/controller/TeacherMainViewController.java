@@ -5,25 +5,30 @@
  */
 package attendance.automation.gui.controller;
 
+import attendance.automation.be.Teacher;
+import attendance.automation.bll.AAManager;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+
 
 /**
  * FXML Controller class
  *
  * @author leopo
  */
-public class TeacherMainViewController implements Initializable
+public class TeacherMainViewController 
 {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-        // TODO
-    }    
+    private Teacher te;
+    private AAManager manager;
+    
+    public TeacherMainViewController() throws IOException{
+        manager = AAManager.getInstance();
+        te = manager.getTeacher();
+    }
+
+    
+    
     
 }

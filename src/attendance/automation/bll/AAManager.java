@@ -44,7 +44,7 @@ public class AAManager {
         return manager;   
     }
     
-    public boolean checkLogin(String login, String password) throws DALException{
+    public boolean checkLogin(String login, String password) throws DALException, IOException{
         return ud.checkLogin(login, password);
     }
     
@@ -71,4 +71,6 @@ public class AAManager {
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return dd.markAttendance(studentID, date);
     }
+    
+    
 }

@@ -5,6 +5,17 @@
  */
 package attendance.automation.be;
 
+import attendance.automation.dal.ConnectionProvider;
+import attendance.automation.dal.DALException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author Revy
@@ -14,13 +25,38 @@ public class Student {
     private String name;
     private int classNum;
     private int id;
+    private ConnectionProvider cp;
+    private List<AttendanceUnit> listOfAttendance;
     
-    public Student(String name, int classNum, int id){
-    this.name=name;
-    this.classNum=classNum;
-    this.id=id;
+    public Student(String name, int classNum, int id) throws IOException, DALException{
+        this.name=name;
+        this.classNum=classNum;
+        this.id=id;
+        cp = new ConnectionProvider();
+        listOfAttendance = new ArrayList<>();
+        loadStudentContent();
     }
-   
+    public void loadStudentContent() throws DALException, IOException{
+    try{
+        Connection con = cp.getConnection();
+        Statement statement = con.createStatement();
+        String str = "SELECT * FROM Student, StudentAttendance WHERE Student.ID=StudentID AND UserName='"+name+"'";
+        ResultSet rs = statement.executeQuery(str);
+        while(rs.next()){
+             Date date1 = rs.getDate("Date");
+             int number = rs.getInt("StudentID");
+             listOfAttendance.add(new AttendanceUnit(number,date1));}
+        }
+        
+        catch (SQLException ex) {
+            throw new DALException (ex);
+        }
+    }
+    
+    
+    
+    
+    
     public String getName()
     {
         return name;
