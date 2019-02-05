@@ -7,6 +7,7 @@ package attendance.automation.be;
 
 import attendance.automation.dal.ConnectionProvider;
 import attendance.automation.dal.DALException;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,11 +21,12 @@ import java.util.List;
  *
  * @author Revy
  */
-public class Student {
+public class Student extends RecursiveTreeObject<Student>{
     
     private String name;
     private int classNum;
     private int id;
+    private String className;
     private ConnectionProvider cp;
     private List<AttendanceUnit> listOfAttendance;
     
@@ -83,5 +85,12 @@ public class Student {
     public void setClassNum(int classNum)
     {
         this.classNum = classNum;
+    }
+    
+    public void setClassName(String className){
+        this.className=className;
+    }
+    public String getClassName(){
+        return className;
     }
 }

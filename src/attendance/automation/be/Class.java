@@ -45,7 +45,9 @@ public class Class {
             System.out.println(userName);
             int classNum = rs.getInt("ClassNum");
             int studentID = rs.getInt("ID");
-            listOfStudents.add(new Student(userName,classNum,studentID));
+            Student student = new Student(userName,classNum,studentID);
+            student.setClassName(name);
+            listOfStudents.add(student);
         }
        }   
         catch (SQLException ex) {
@@ -76,5 +78,9 @@ public class Class {
     }
     public List<Student> getStudentsList(){
          return listOfStudents;
+    }
+    @Override
+    public String toString(){
+        return name;
     }
 }

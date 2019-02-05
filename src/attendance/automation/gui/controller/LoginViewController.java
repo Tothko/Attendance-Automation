@@ -7,7 +7,6 @@ package attendance.automation.gui.controller;
 
 import attendance.automation.bll.AAManager;
 import attendance.automation.dal.DALException;
-import com.jfoenix.controls.JFXSpinner;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -66,6 +65,11 @@ public class LoginViewController implements Initializable {
     private void loginMethod(ActionEvent event) throws DALException, IOException, InterruptedException {
         String login = loginField.getText();
         String password = passwordField.getText();
+        login(login, password);
+        
+    }
+    
+    private void login(String login, String password) throws DALException, IOException{
         if(manager.checkLogin(login, password)){
             manager.setUser();
             if(!manager.isTeacher()){
@@ -138,6 +142,16 @@ public class LoginViewController implements Initializable {
                 stage.setY(event.getScreenY() - yOffset);
             }
         });
+    }
+
+    @FXML
+    private void loginStudent(ActionEvent event) throws DALException, IOException {
+        login("JanToth","1234");
+    }
+
+    @FXML
+    private void loginTeacher(ActionEvent event) throws DALException, IOException {
+        login("MarekStancik","cplusplus");
     }
     
 }
