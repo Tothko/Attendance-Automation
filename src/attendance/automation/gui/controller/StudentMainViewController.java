@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  *
@@ -31,10 +32,8 @@ public class StudentMainViewController implements Initializable {
     private Label welcomeLabel;
     private AAManager manager;
     private Student st;
-    @FXML
     private Label dateLabel;
-    @FXML
-    private Label attendanceFeedback;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,17 +43,16 @@ public class StudentMainViewController implements Initializable {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         st = manager.getStudent();
-	LocalDate localDate = LocalDate.now();
-        welcomeLabel.setText("Welcome, "+st.getName()+". Have nice day!");
-        dateLabel.setText(localDate.toString());
+        welcomeLabel.setText("Welcome "+st.getName());
+    
     }    
 
     @FXML
-    private void attendanceButton(ActionEvent event) throws DALException {
-        if(manager.markAttendance(st.getId()))
-            attendanceFeedback.setText("Attendance marked successfully!");
-        else
-            attendanceFeedback.setText("Attendance already marked!");
+    private void closeButton(ActionEvent event) {
+        Stage stage = (Stage)welcomeLabel.getScene().getWindow();
+        stage.close();
     }
+
+    
     
 }
