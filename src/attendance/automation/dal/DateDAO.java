@@ -11,6 +11,9 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,6 +66,24 @@ public class DateDAO {
             ppst.execute();}
         
        catch (SQLException ex) {
+            throw new DALException(ex);
+        }
+    }
+    public double getAttendancesForThisMonth(int studentID) throws DALException{
+        try {
+            double num = 0;
+            Connection con = cp.getConnection();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+            Date date = new Date();
+            String string = "Select * From StudentAttendance Where StudentID="+studentID+" AND Date like '"+dateFormat.format(date)+"%'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(string);
+            while(rs.next()){
+                num++;
+            }
+            System.out.println(num);
+            return num;
+        } catch (SQLException ex) {
             throw new DALException(ex);
         }
     }

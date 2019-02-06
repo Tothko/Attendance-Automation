@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import static java.time.temporal.TemporalQueries.localDate;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -71,6 +72,17 @@ public class AAManager {
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return dd.markAttendance(studentID, date);
     }
-    
+    public double attendanceRate(int studentID) throws DALException{
+        double schoolDays = 0;
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.set(Calendar.DAY_OF_MONTH, 1);
+        while(c1.before(c2)||c1.equals(c2)){
+            if(c1.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && c1.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+                schoolDays++;
+            c1.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return dd.getAttendancesForThisMonth(studentID)/schoolDays;
+    }
     
 }
