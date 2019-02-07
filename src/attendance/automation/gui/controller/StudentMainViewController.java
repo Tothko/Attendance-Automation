@@ -74,7 +74,6 @@ public class StudentMainViewController implements Initializable {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         st = manager.getStudent();
-        CalendarViewController CWC = new CalendarViewController(st);
         welcomeLabel.setText("Welcome "+st.getName());
         mCalendar = Calendar.getInstance();
         try {
@@ -88,10 +87,12 @@ public class StudentMainViewController implements Initializable {
         fadeIn(btnExit);
         fadeIn(btnLogin);
         try {
+            CalendarViewController kokot = new CalendarViewController(this);
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setController(CWC);
+            fxmlLoader.setController(kokot);
             Pane newLoadedPane = new Pane(); 
             newLoadedPane = fxmlLoader.load(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
+            paneCalendar.getChildren().clear();
             paneCalendar.getChildren().add(newLoadedPane); 
         } catch (Exception ex) {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -135,5 +136,9 @@ public class StudentMainViewController implements Initializable {
         exitFade.setToValue(1);
         exitFade.play();
     }
+    public Student getStudent(){
+        return st;
+    }
+
     
 }

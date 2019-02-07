@@ -29,6 +29,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author Tothko
  */
+
 public class CalendarViewController implements Initializable {
 
     private URL url;
@@ -47,15 +48,14 @@ public class CalendarViewController implements Initializable {
     private Button buttonNextMonth;
     private List<AttendanceUnit> attendance = new ArrayList();
     private String buttonColor = "-fx-background-color: Grey";
-    
-    public CalendarViewController(Student student) {
-        this.attendance = student.getAttendence();
-
+    private StudentMainViewController SMWC;
+    private Student student;
+    public CalendarViewController(StudentMainViewController controller){
+        SMWC = controller;
+        
     }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         y = 1;
         this.url = url;
         this.rb = rb;
@@ -115,6 +115,11 @@ public class CalendarViewController implements Initializable {
         localDate = localDate.plusMonths(1);
         GridCalendar.getChildren().clear();
         initialize(url, rb);
+    }
+    private void setStudent(){
+        this.student = SMWC.getStudent();
+        
+        
     }
 
 }
