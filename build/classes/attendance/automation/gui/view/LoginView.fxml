@@ -10,21 +10,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="hroot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="352.0" style="-fx-background-radius: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.LoginViewController">
+<AnchorPane fx:id="hroot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="352.0" style="-fx-background-radius: 0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.LoginViewController">
    <children>
-      <ImageView fitHeight="47.0" fitWidth="91.0" layoutX="131.0" layoutY="163.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="131.0" AnchorPane.topAnchor="163.0">
+      <ImageView fx:id="pic" fitHeight="47.0" fitWidth="91.0" layoutX="131.0" layoutY="163.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="131.0" AnchorPane.topAnchor="163.0">
          <image>
             <Image url="@../../gui/images/easv-logo1.png" />
          </image>
       </ImageView>
       <JFXTextField fx:id="loginField" layoutX="92.0" layoutY="31.0" />
       <JFXPasswordField fx:id="passwordField" layoutX="92.0" layoutY="105.0" />
-      <JFXButton layoutX="142.0" layoutY="258.0" onAction="#loginMethod" ripplerFill="#3e1cb9" style="-fx-background-color: #569CFF;" text="Log in" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS">
+      <JFXButton fx:id="btnLogin" layoutX="142.0" layoutY="258.0" onAction="#loginMethod" ripplerFill="#3e1cb9" style="-fx-background-color: #569CFF;" text="Log in" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="317.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#closeWindow" prefHeight="21.0" prefWidth="21.0" ripplerFill="#c90202" style="-fx-background-color: #ff9999; -fx-background-radius: 36;" text=" " />
+      <JFXButton fx:id="btnExit" layoutX="317.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#closeWindow" prefHeight="21.0" prefWidth="21.0" ripplerFill="#c90202" style="-fx-background-color: #ff9999; -fx-background-radius: 36;" text=" " />
       <Label layoutX="23.0" layoutY="51.0" text="Login" />
       <Label layoutX="10.0" layoutY="110.0" text="Password" />
       <Label fx:id="loginFailed" layoutX="131.0" layoutY="219.0" prefHeight="21.0" prefWidth="91.0" textAlignment="CENTER" textFill="RED">
