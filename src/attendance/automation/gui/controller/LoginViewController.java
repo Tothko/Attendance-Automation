@@ -7,24 +7,29 @@ package attendance.automation.gui.controller;
 
 import attendance.automation.bll.AAManager;
 import attendance.automation.dal.DALException;
+import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -44,6 +49,12 @@ public class LoginViewController implements Initializable {
     private double yOffset = 0;
     @FXML
     private Label loginFailed;
+    @FXML
+    private ImageView pic;
+    @FXML
+    private JFXButton btnLogin;
+    @FXML
+    private JFXButton btnExit;
     /**
      * Initializes the controller class.
      */
@@ -54,6 +65,11 @@ public class LoginViewController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        fadeIn(btnExit);
+        fadeIn(btnLogin);
+        fadeIn(pic);
+        
     }    
 
     @FXML
@@ -153,5 +169,14 @@ public class LoginViewController implements Initializable {
     private void loginTeacher(ActionEvent event) throws DALException, IOException {
         login("MarekStancik","cplusplus");
     }
+    
+    private void fadeIn(Node node)
+    {
+        FadeTransition exitFade = new FadeTransition(Duration.seconds(2), node);
+        exitFade.setFromValue(0);
+        exitFade.setToValue(1);
+        exitFade.play();
+    }
+
     
 }

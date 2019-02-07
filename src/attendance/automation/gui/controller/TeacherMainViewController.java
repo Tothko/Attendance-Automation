@@ -23,16 +23,20 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -55,6 +59,12 @@ public class TeacherMainViewController implements Initializable {
     private AAManager manager;
     private List<Class> listOfClasses;
     private ObservableList<Class> observableClasses;
+    @FXML
+    private JFXButton btnExit;
+    @FXML
+    private JFXButton btnMinimize;
+    @FXML
+    private ImageView pic;
     /**
      * Initializes the controller class.
      */
@@ -74,6 +84,11 @@ public class TeacherMainViewController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TeacherMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }    
+        
+        fadeIn(btnExit);
+        fadeIn(btnMinimize);
+        fadeIn(pic);
+        
     }    
     public void setTableView(){
         JFXTreeTableColumn<Student,String> studentName = new JFXTreeTableColumn<>("Student");
@@ -112,4 +127,13 @@ public class TeacherMainViewController implements Initializable {
         Stage stage = (Stage)welcomeLabel.getScene().getWindow();
         stage.setIconified(true);
     }
+    
+    private void fadeIn(Node node)
+    {
+        FadeTransition exitFade = new FadeTransition(Duration.seconds(2), node);
+        exitFade.setFromValue(0);
+        exitFade.setToValue(1);
+        exitFade.play();
+    }
+    
 }

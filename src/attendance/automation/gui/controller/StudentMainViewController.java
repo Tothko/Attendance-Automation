@@ -19,11 +19,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -41,6 +44,10 @@ public class StudentMainViewController implements Initializable {
     @FXML
     private Label attendanceRate;
     Calendar mCalendar;
+    @FXML
+    private JFXButton btnExit;
+    @FXML
+    private JFXButton btnLogin;
     
     
     @Override
@@ -58,6 +65,10 @@ public class StudentMainViewController implements Initializable {
         } catch (DALException ex) {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        fadeIn(btnExit);
+        fadeIn(btnLogin);
+        
     }    
 
     @FXML
@@ -88,4 +99,13 @@ public class StudentMainViewController implements Initializable {
         else
             attendanceLabel.setText("Attendance already marked!");
     }
+    
+    private void fadeIn(Node node)
+    {
+        FadeTransition exitFade = new FadeTransition(Duration.seconds(2), node);
+        exitFade.setFromValue(0);
+        exitFade.setToValue(1);
+        exitFade.play();
+    }
+    
 }
