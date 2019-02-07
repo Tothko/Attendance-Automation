@@ -90,8 +90,11 @@ public class StudentMainViewController implements Initializable {
             CalendarViewController kokot = new CalendarViewController(this);
              FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
              loader.setController(kokot);
+             Pane kokotina = new Pane();
+             kokotina = loader.load();
+                     
             paneCalendar.getChildren().clear();
-            paneCalendar = loader.load();
+            paneCalendar.getChildren().add(kokotina);
         } catch (Exception ex) {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
