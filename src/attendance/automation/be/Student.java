@@ -93,4 +93,7 @@ public class Student extends RecursiveTreeObject<Student>{
     public String getClassName(){
         return className;
     }
+    public List<AttendanceUnit> getAttendence(){
+        return listOfAttendance;
+    }
 }

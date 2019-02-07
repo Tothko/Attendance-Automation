@@ -19,4 +19,22 @@ public class AttendanceUnit {
         this.attendanceDate=attendanceDate;
         this.studentID=studentID;
     }
+
+    public int getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
+
+    public Date getAttendanceDate() {
+        return attendanceDate;
+    }
+
+    public void setAttendanceDate(Date attendanceDate) {
+        this.attendanceDate = attendanceDate;
+    }
+    
+    
 }
