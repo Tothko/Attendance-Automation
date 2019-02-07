@@ -88,12 +88,10 @@ public class StudentMainViewController implements Initializable {
         fadeIn(btnLogin);
         try {
             CalendarViewController kokot = new CalendarViewController(this);
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setController(kokot);
-            Pane newLoadedPane = new Pane(); 
-            newLoadedPane = fxmlLoader.load(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
+             FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
+             loader.setController(kokot);
             paneCalendar.getChildren().clear();
-            paneCalendar.getChildren().add(newLoadedPane); 
+            paneCalendar = loader.load();
         } catch (Exception ex) {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -56,6 +56,10 @@ public class CalendarViewController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        setStudent();
+        attendance = student.getAttendence();
+        
         y = 1;
         this.url = url;
         this.rb = rb;
@@ -65,7 +69,7 @@ public class CalendarViewController implements Initializable {
 
         for (int i = 1; i <= localDate.lengthOfMonth(); ++i) {
             (localDate.minusDays(localDate.getDayOfMonth())).getDayOfWeek();
-
+            
             if (x == 7) {
                 x = 0;
                 y++;
@@ -73,7 +77,9 @@ public class CalendarViewController implements Initializable {
             if (y == 6) {
                 y = 1;
             }
+            System.out.println("Je to?"+attendance);
             for (AttendanceUnit attendanceUnit : attendance) {
+                System.out.println(""+attendanceUnit.getAttendanceDate());
                 System.out.println(""+attendanceUnit.getAttendanceDate().getDay());
                 if(attendanceUnit.getAttendanceDate().getDay() == i){
                     buttonColor = "-fx-background-color: Green";
@@ -86,8 +92,9 @@ public class CalendarViewController implements Initializable {
                 }
                 
                 
-                
+              
             }
+            
             Button butt = new Button();
             butt.setText("" + i);
             butt.setStyle(buttonColor);
@@ -116,7 +123,7 @@ public class CalendarViewController implements Initializable {
         GridCalendar.getChildren().clear();
         initialize(url, rb);
     }
-    private void setStudent(){
+    public void setStudent(){
         this.student = SMWC.getStudent();
         
         
