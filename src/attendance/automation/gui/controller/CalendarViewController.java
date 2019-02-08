@@ -79,16 +79,25 @@ public class CalendarViewController implements Initializable {
             }
             System.out.println("Je to?"+attendance);
             for (AttendanceUnit attendanceUnit : attendance) {
-                System.out.println(""+attendanceUnit.getAttendanceDate());
-                System.out.println(""+attendanceUnit.getAttendanceDate().getDay());
-                if(attendanceUnit.getAttendanceDate().getDay() == i){
-                    buttonColor = "-fx-background-color: Green";
+              
+                System.out.println("GetDay"+((attendanceUnit.getAttendanceDate().getDate()) == i));
+                System.out.println("GetMonth"+((attendanceUnit.getAttendanceDate().getMonth()+1) == localDate.getMonthValue()));
+                System.out.println("GetYear"+((attendanceUnit.getAttendanceDate().getYear()+1900) == localDate.getYear()));
+                System.out.println("my"+(attendanceUnit.getAttendanceDate().getDate()) +""+ ((attendanceUnit.getAttendanceDate().getMonth()+1) +""+((attendanceUnit.getAttendanceDate().getYear()+1900))));
+                
+                
+                if((attendanceUnit.getAttendanceDate().getDate() != i) && (((attendanceUnit.getAttendanceDate().getMonth()+1) != localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear()+1900) == localDate.getYear()))){
+                    buttonColor = "-fx-background-color: Red";
+                    break;
                 }
-                else if((attendanceUnit.getAttendanceDate().getDay() != i) && (attendanceUnit.getAttendanceDate().getDay()<= localDate.getDayOfMonth())){
-                    buttonColor = "-fx-background-color: Grey";
+                else if((attendanceUnit.getAttendanceDate().getDate() == i) && (((attendanceUnit.getAttendanceDate().getMonth()+1) == localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear()+1900) == localDate.getYear()))){
+                    buttonColor = "-fx-background-color: Green"; 
+                    break;
                 }
                 else{
-                    buttonColor = "-fx-background-color: Red";
+                    buttonColor = "-fx-background-color: Grey";
+                    break;
+                    
                 }
                 
                 
@@ -98,6 +107,7 @@ public class CalendarViewController implements Initializable {
             Button butt = new Button();
             butt.setText("" + i);
             butt.setStyle(buttonColor);
+            butt.setMinSize(32, 32);
             butt.setOnAction(new EventHandler<ActionEvent>() {
             
                 @Override
