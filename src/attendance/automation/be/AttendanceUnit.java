@@ -35,6 +35,11 @@ public class AttendanceUnit {
     public void setAttendanceDate(Date attendanceDate) {
         this.attendanceDate = attendanceDate;
     }
+
+    @Override
+    public String toString() {
+        return "AttendanceUnit{" + "studentID=" + studentID + ", attendanceDate=" + attendanceDate + '}';
+    }
     
     
 }
