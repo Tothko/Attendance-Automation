@@ -113,7 +113,7 @@ public class StudentMainViewController implements Initializable {
             attendanceLabel.setText("Today is weekend!");
         
     }
-
+    
     public void calculateAttendanceRate() throws DALException{   
         String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
         String string = month+" - "+(int)(manager.attendanceRate(st.getId())*100)+"%";

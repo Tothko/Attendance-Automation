@@ -49,7 +49,7 @@ public class CalendarViewController implements Initializable {
     private String buttonColor = "-fx-background-color: Grey";
     
     public CalendarViewController(Student student) {
-        this.attendance = student.getAttendence();
+        this.attendance = student.getAttendance();
 
     }
 

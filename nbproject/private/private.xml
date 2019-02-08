@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/attendance/automation/gui/controller/TeacherMainViewController.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/be/Class.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/be/AttendanceUnit.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/be/Teacher.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/gui/controller/TeacherMainViewController.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/be/Student.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/dal/DateDAO.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/bll/AAManager.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/gui/controller/LoginViewController.java</file>
-            <file>file:/C:/Users/Revy/Documents/GitHub/Attendance-Automation/src/attendance/automation/dal/UserDAO.java</file>
+            <file>file:/C:/Users/Szymon/Desktop/Actual%20java/Attendance-Automation/src/attendance/automation/gui/controller/LoginViewController.java</file>
+            <file>file:/C:/Users/Szymon/Desktop/Actual%20java/Attendance-Automation/src/attendance/automation/css/attendance.automation.css</file>
         </group>
     </open-files>
 </project-private>

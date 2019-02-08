@@ -83,8 +83,16 @@ public class TeacherMainViewController implements Initializable {
             loadDataToTable(FXCollections.observableArrayList(observableClasses.get(0).getStudentsList()));
         } catch (IOException ex) {
             Logger.getLogger(TeacherMainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-        
+        }   
+        /*
+        for (Class eachClass : listOfClasses) {
+            for (Student eachStudent : eachClass.getStudentsList()) {
+                eachStudent.setAttendanceOfStudent(0);manager.attendanceRate(eachStudent.getId())
+                
+            }
+            
+        }
+        */
         fadeIn(btnExit);
         fadeIn(btnMinimize);
         fadeIn(pic);
@@ -92,17 +100,18 @@ public class TeacherMainViewController implements Initializable {
     }    
     public void setTableView(){
         JFXTreeTableColumn<Student,String> studentName = new JFXTreeTableColumn<>("Student");
-        JFXTreeTableColumn<Student,String> studentID = new JFXTreeTableColumn<>("ID");
-        JFXTreeTableColumn<Student,String> studentClass = new JFXTreeTableColumn<>("Class");
+        JFXTreeTableColumn<Student,String> studentAttendance = new JFXTreeTableColumn<>("Attendance");
+        
         studentName.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
-        studentID.setCellValueFactory(new TreeItemPropertyValueFactory<>("id"));
-        studentClass.setCellValueFactory(new TreeItemPropertyValueFactory<>("className"));
-        tableView.getColumns().addAll(studentName,studentID,studentClass);
-        studentSearch.textProperty().addListener((o,oldVal,newVal)->{
+        studentAttendance.setCellValueFactory(new TreeItemPropertyValueFactory<>("attendanceOfStudent"));
+        
+        tableView.getColumns().addAll(studentName,studentAttendance);
+       /* studentSearch.textProperty().addListener((o,oldVal,newVal)->{
         tableView.setPredicate(student -> String.valueOf(student.getValue().getId()).toLowerCase().contains(newVal.toLowerCase())
                 || student.getValue().getName().toLowerCase().contains(newVal.toLowerCase())
                 || student.getValue().getClassName().toLowerCase().contains(newVal.toLowerCase()));
                                                                 });
+*/
     }
     
     public void loadDataToTable(ObservableList<Student> list){

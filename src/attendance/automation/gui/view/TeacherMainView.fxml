@@ -17,8 +17,7 @@
          <font>
             <Font size="28.0" />
          </font></Label>
-      <JFXButton fx:id="btnExit" layoutX="750.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#exitButton" prefHeight="20.0" prefWidth="20.0" ripplerFill="RED" style="-fx-background-color: #ff6d6d; -fx-background-radius: 36;" text=" " />
-      <JFXButton fx:id="btnMinimize" layoutX="716.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#minimizeButton" prefHeight="20.0" prefWidth="20.0" ripplerFill="#16a101" style="-fx-background-color: #65d355; -fx-background-radius: 36;" text=" " />
+      <JFXButton fx:id="btnMinimize" buttonType="RAISED" layoutX="716.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#minimizeButton" prefHeight="20.0" prefWidth="20.0" ripplerFill="#16a101" style="-fx-background-color: #65d355; -fx-background-radius: 36;" text=" " />
       <AnchorPane fx:id="calendarPane" layoutX="420.0" layoutY="190.0" prefHeight="400.0" prefWidth="340.0" style="-fx-border-color: grey;">
          <children>
             <Label layoutX="86.0" layoutY="160.0" prefHeight="54.0" prefWidth="193.0" text="CALENDAR">
@@ -38,5 +37,6 @@
          <columnResizePolicy>
             <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></JFXTreeTableView>
+      <JFXButton id="kurwaxd" fx:id="btnExit" buttonType="RAISED" layoutX="750.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#exitButton" prefHeight="21.0" prefWidth="21.0" ripplerFill="#c8110e" style="-fx-background-color: #FF110E; -fx-background-radius: 36;" styleClass="btnExitClass" text=" " />
    </children>
 </AnchorPane>

@@ -22,12 +22,12 @@
          </children>
       </AnchorPane>
       <Label fx:id="attendanceRate" layoutX="193.0" layoutY="294.0" text="February 10/12 -  83%" />
-      <JFXButton fx:id="btnExit" layoutX="500.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#closeButton" prefHeight="20.0" prefWidth="20.0" ripplerFill="RED" style="-fx-background-radius: 36; -fx-background-color: #ff6b6b;" text=" " />
       <JFXButton fx:id="btnLogin" layoutX="166.0" layoutY="155.0" onAction="#attendanceButton" prefHeight="97.0" prefWidth="200.0" ripplerFill="BLACK" style="-fx-border-color: grey;" text="Mark attendance">
          <font>
             <Font name="System Italic" size="21.0" />
          </font>
       </JFXButton>
       <Label fx:id="attendanceLabel" alignment="CENTER" layoutX="123.0" layoutY="265.0" prefHeight="21.0" prefWidth="287.0" textFill="RED" />
+      <JFXButton id="kurwaxd" fx:id="btnExit" buttonType="RAISED" layoutX="483.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#closeButton" prefHeight="21.0" prefWidth="21.0" ripplerFill="#c8110e" style="-fx-background-color: #FF110E; -fx-background-radius: 36;" styleClass="btnExitClass" text=" " />
     </children>
 </AnchorPane>

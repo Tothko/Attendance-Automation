@@ -24,9 +24,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -39,15 +41,12 @@ import javafx.util.Duration;
 public class LoginViewController implements Initializable {
 
     @FXML
-    private AnchorPane hroot;
-    @FXML
     private TextField loginField;
     @FXML
     private TextField passwordField;
     private AAManager manager;
     private double xOffset = 0;
     private double yOffset = 0;
-    @FXML
     private Label loginFailed;
     @FXML
     private ImageView pic;
@@ -55,9 +54,13 @@ public class LoginViewController implements Initializable {
     private JFXButton btnLogin;
     @FXML
     private JFXButton btnExit;
+    @FXML
+    private AnchorPane loginWindow;
     /**
      * Initializes the controller class.
      */
+
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -70,13 +73,15 @@ public class LoginViewController implements Initializable {
         fadeIn(btnLogin);
         fadeIn(pic);
         
+        
+    
+        
     }    
 
     @FXML
     private void closeWindow(ActionEvent event) {
         System.exit(0);
     }
-
     @FXML
     private void loginMethod(ActionEvent event) throws DALException, IOException, InterruptedException {
         String login = loginField.getText();
@@ -159,13 +164,11 @@ public class LoginViewController implements Initializable {
             }
         });
     }
-
-    @FXML
+@FXML
     private void loginStudent(ActionEvent event) throws DALException, IOException {
         login("JanToth","1234");
     }
-
-    @FXML
+@FXML
     private void loginTeacher(ActionEvent event) throws DALException, IOException {
         login("MarekStancik","cplusplus");
     }
@@ -177,6 +180,37 @@ public class LoginViewController implements Initializable {
         exitFade.setToValue(1);
         exitFade.play();
     }
+@FXML
+    private void forgotPasswordButt(ActionEvent event) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/ForgotPasswordView.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        Stage stage = (Stage) loginWindow.getScene().getWindow();
+        stage.close();
+        
+        Stage stage2 = new Stage();
+        stage2.initStyle(StageStyle.UNDECORATED);       
+        Scene scene = new Scene(root1);
+        stage2.setScene(scene);
+        stage2.show();
+        
+        
+        root1.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        root1.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+    }
 
+    
     
 }

@@ -5,6 +5,7 @@
  */
 package attendance.automation.be;
 
+import attendance.automation.bll.AAManager;
 import attendance.automation.dal.ConnectionProvider;
 import attendance.automation.dal.DALException;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -26,9 +27,15 @@ public class Student extends RecursiveTreeObject<Student>{
     private String name;
     private int classNum;
     private int id;
+
+    public List<AttendanceUnit> getAttendance() {
+        return listOfAttendance;
+    }
     private String className;
     private ConnectionProvider cp;
     private List<AttendanceUnit> listOfAttendance;
+    private String attendanceOfStudent;
+    private AAManager manager;
     
     public Student(String name, int classNum, int id) throws IOException, DALException{
         this.name=name;
@@ -36,7 +43,10 @@ public class Student extends RecursiveTreeObject<Student>{
         this.id=id;
         cp = new ConnectionProvider();
         listOfAttendance = new ArrayList<>();
+        manager=AAManager.getInstance();
         loadStudentContent();
+        setAttendanceOfStudent();
+        System.out.println("attendance of student with id:"+id+": "+getAttendanceOfStudent());
     }
     public void loadStudentContent() throws DALException, IOException{
     try{
@@ -53,9 +63,17 @@ public class Student extends RecursiveTreeObject<Student>{
         catch (SQLException ex) {
             throw new DALException (ex);
         }
+    
+    }
+
+    public void setAttendanceOfStudent() throws DALException {
+        attendanceOfStudent = Integer.toString((int)(manager.attendanceRate(id)*100))+"%";
+                
     }
     
-    
+    public String getAttendanceOfStudent(){
+    return attendanceOfStudent;
+    }
     
     
     
@@ -92,8 +110,5 @@ public class Student extends RecursiveTreeObject<Student>{
     }
     public String getClassName(){
         return className;
-    }
-    public List<AttendanceUnit> getAttendence(){
-        return listOfAttendance;
     }
 }
