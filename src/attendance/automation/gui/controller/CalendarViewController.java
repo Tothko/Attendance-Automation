@@ -58,7 +58,7 @@ public class CalendarViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         setStudent();
-        attendance = student.getAttendence();
+        attendance = student.getAttendance();
         
         y = 1;
         this.url = url;
