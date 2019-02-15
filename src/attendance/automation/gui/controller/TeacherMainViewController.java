@@ -98,20 +98,20 @@ public class TeacherMainViewController implements Initializable {
         fadeIn(pic);
         
     }    
-    public void setTableView(){
-        JFXTreeTableColumn<Student,String> studentName = new JFXTreeTableColumn<>("Student");
-        JFXTreeTableColumn<Student,String> studentAttendance = new JFXTreeTableColumn<>("Attendance");
-        
+     public void setTableView() {
+        JFXTreeTableColumn<Student, String> studentName = new JFXTreeTableColumn<>("Student");
+        JFXTreeTableColumn<Student, String> studentAttendance = new JFXTreeTableColumn<>("Attendance");
+
         studentName.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
         studentAttendance.setCellValueFactory(new TreeItemPropertyValueFactory<>("attendanceOfStudent"));
-        
-        tableView.getColumns().addAll(studentName,studentAttendance);
-       /* studentSearch.textProperty().addListener((o,oldVal,newVal)->{
-        tableView.setPredicate(student -> String.valueOf(student.getValue().getId()).toLowerCase().contains(newVal.toLowerCase())
-                || student.getValue().getName().toLowerCase().contains(newVal.toLowerCase())
-                || student.getValue().getClassName().toLowerCase().contains(newVal.toLowerCase()));
-                                                                });
-*/
+
+        tableView.getColumns().addAll(studentName, studentAttendance);
+        studentSearch.textProperty().addListener((o, oldVal, newVal) -> {
+            tableView.setPredicate(student -> String.valueOf(student.getValue().getName()).toLowerCase().contains(newVal.toLowerCase())
+                    || student.getValue().getAttendanceOfStudent().contains(newVal)
+            );
+        });
+
     }
     
     public void loadDataToTable(ObservableList<Student> list){
