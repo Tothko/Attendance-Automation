@@ -93,12 +93,12 @@ public class CalendarViewController implements Initializable {
             if (y == 6) {
                 y = 1;
             }
-            System.out.println("Je to?" + attendance);
+//            System.out.println("Je to?" + attendance);
             for (AttendanceUnit attendanceUnit : attendance) {
-                System.out.println("GetDay" + ((attendanceUnit.getAttendanceDate().getDate()) == i));
-                System.out.println("GetMonth" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) == localDate.getMonthValue()));
-                System.out.println("GetYear" + ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()));
-                System.out.println("my" + (attendanceUnit.getAttendanceDate().getDate()) + "" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) + "" + ((attendanceUnit.getAttendanceDate().getYear() + 1900))));
+//                System.out.println("GetDay" + ((attendanceUnit.getAttendanceDate().getDate()) == i));
+//                System.out.println("GetMonth" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) == localDate.getMonthValue()));
+//                System.out.println("GetYear" + ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()));
+//                System.out.println("my" + (attendanceUnit.getAttendanceDate().getDate()) + "" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) + "" + ((attendanceUnit.getAttendanceDate().getYear() + 1900))));
 
                 if ((attendanceUnit.getAttendanceDate().getDate() != i) && (attendanceUnit.getAttendanceDate().getDate() <= localDate.getDayOfMonth()) && (((attendanceUnit.getAttendanceDate().getMonth() + 1) != localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()))) {
                     buttonColor = "-fx-background-color: Red";

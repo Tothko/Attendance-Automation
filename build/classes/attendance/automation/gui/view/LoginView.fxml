@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,9 +18,9 @@
             <Image url="@../../gui/images/easv-logo1.png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="loginField" alignment="CENTER" layoutX="76.0" layoutY="119.0" promptText="Login" stylesheets="@../../css/attendance.automation.css" />
+      <JFXTextField fx:id="loginField" alignment="CENTER" layoutX="76.0" layoutY="119.0" promptText="Login/Email" stylesheets="@../../css/attendance.automation.css" />
       <JFXPasswordField fx:id="passwordField" alignment="CENTER" layoutX="76.0" layoutY="173.0" promptText="Password" />
-      <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="109.0" layoutY="224.0" onAction="#loginMethod" ripplerFill="#3e1cb9" style="-fx-background-color: #569CFF;" text="Log in" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS">
+      <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="76.0" layoutY="209.0" onAction="#loginMethod" prefHeight="37.0" prefWidth="135.0" ripplerFill="#3e1cb9" style="-fx-background-color: #569CFF;" text="Log in" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -27,8 +28,9 @@
       <JFXButton id="kurwaxd" fx:id="btnExit" buttonType="RAISED" layoutX="255.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#closeWindow" prefHeight="21.0" prefWidth="21.0" ripplerFill="#c8110e" style="-fx-background-color: #FF110E; -fx-background-radius: 36;" styleClass="btnExitClass" text=" " />
       <Label layoutX="45.0" layoutY="60.0" />
       <Label layoutX="35.0" layoutY="110.0" />
-      <Button layoutX="56.0" layoutY="167.0" mnemonicParsing="false" onAction="#loginStudent" text="Student" />
-      <Button layoutX="56.0" layoutY="115.0" mnemonicParsing="false" onAction="#loginTeacher" text="Teacher" />
-      <JFXButton layoutX="85.0" layoutY="276.0" onAction="#forgotPasswordButt" prefHeight="25.0" prefWidth="117.0" text="Forgot password?" underline="true" />
+      <Button layoutX="27.0" layoutY="93.0" mnemonicParsing="false" onAction="#loginStudent" text="Student" />
+      <Button layoutX="27.0" layoutY="56.0" mnemonicParsing="false" onAction="#loginTeacher" text="Teacher" />
+      <JFXButton layoutX="85.0" layoutY="296.0" onAction="#forgotPasswordButt" prefHeight="25.0" prefWidth="117.0" text="Forgot password?" underline="true" />
+      <CheckBox fx:id="rememberUsernameCheckBox" layoutX="76.0" layoutY="258.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="135.0" text="Remember username" />
    </children>
 </AnchorPane>
