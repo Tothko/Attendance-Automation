@@ -61,19 +61,20 @@ public class CalendarViewController implements Initializable {
     @FXML
     private Button buttonNextMonth;
     private List<AttendanceUnit> attendance = new ArrayList();
-    private String buttonColor = "-fx-background-color: Grey";
-    private StudentMainViewController SMWC;
+    private String buttonColor = "-fx-background-color: Grey -fx-font-size: 9px";
+    private StudentMainViewController SMWC = null;
+    private TeacherMainViewController TMWC = null;
     private Student student;
 
-    public CalendarViewController(StudentMainViewController controller) {
-        SMWC = controller;
-
+    public CalendarViewController(StudentMainViewController studentController, TeacherMainViewController teacherController, Student student) {
+        SMWC = studentController;
+        TMWC = teacherController;
+        this.student = student;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        setStudent();
         attendance = student.getAttendance();
 
         y = 1;
@@ -101,14 +102,14 @@ public class CalendarViewController implements Initializable {
 //                System.out.println("my" + (attendanceUnit.getAttendanceDate().getDate()) + "" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) + "" + ((attendanceUnit.getAttendanceDate().getYear() + 1900))));
 
                 if ((attendanceUnit.getAttendanceDate().getDate() != i) && (attendanceUnit.getAttendanceDate().getDate() <= localDate.getDayOfMonth()) && (((attendanceUnit.getAttendanceDate().getMonth() + 1) != localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()))) {
-                    buttonColor = "-fx-background-color: Red";
+                    buttonColor = "-fx-background-color: Red; -fx-font-size: 9px";
                     break;
 
                 } else if ((attendanceUnit.getAttendanceDate().getDate() == i) && (((attendanceUnit.getAttendanceDate().getMonth() + 1) == localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()))) {
-                    buttonColor = "-fx-background-color: Green";
+                    buttonColor = "-fx-background-color: Green; -fx-font-size: 14px";
                     break;
                 } else {
-                    buttonColor = "-fx-background-color: Grey";
+                    buttonColor = "-fx-background-color: Grey; -fx-font-size: 9px";
 
                 }
 
@@ -117,8 +118,8 @@ public class CalendarViewController implements Initializable {
             Button butt = new Button();
             butt.setText("" + i);
             butt.setStyle(buttonColor);
-            butt.setMinSize(32, 32);
-            butt.setMaxSize(32, 32);
+            butt.setMinSize(35, 35);
+            butt.setMaxSize(35, 35);
             butt.setOnAction(new EventHandler<ActionEvent>() {
 
                 @Override
@@ -140,15 +141,15 @@ public class CalendarViewController implements Initializable {
     }
 
     @FXML
-    private void pressButtonnNextMonth(ActionEvent event) {
+    private void pressButtonNextMonth(ActionEvent event) {
         localDate = localDate.plusMonths(1);
         GridCalendar.getChildren().clear();
         initialize(url, rb);
         loadDaysLabel();
     }
 
-    public void setStudent() {
-        this.student = SMWC.getStudent();
+    public void setStudent(Student student) {
+        this.student = student;
 
     }
 

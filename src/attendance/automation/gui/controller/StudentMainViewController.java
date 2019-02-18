@@ -41,7 +41,7 @@ import javafx.util.Duration;
  * @author Tothko
  */
 public class StudentMainViewController implements Initializable {
-    
+
     @FXML
     private Label welcomeLabel;
     private AAManager manager;
@@ -60,86 +60,76 @@ public class StudentMainViewController implements Initializable {
     private double yOffset = 0;
     @FXML
     private AnchorPane paneCalendar;
+
     ;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
- 
-        
-    
-        
+
         try {
             manager = AAManager.getInstance();
-        } catch (IOException ex) {
-            Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        st = manager.getStudent();
-        welcomeLabel.setText("Welcome "+st.getName());
-        mCalendar = Calendar.getInstance();
-        try {
+            st = manager.getStudent();
+            welcomeLabel.setText("Welcome " + st.getName());
+            mCalendar = Calendar.getInstance();
             calculateAttendanceRate();
-        } catch (DALException ex) {
-            Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        fadeIn(btnExit);
-        fadeIn(btnLogin);
-        try {
-            CalendarViewController kokot = new CalendarViewController(this);
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
-             loader.setController(kokot);
-             Pane kokotina = new Pane();
-             kokotina = loader.load();
-                     
+
+            fadeIn(btnExit);
+            fadeIn(btnLogin);
+
+            CalendarViewController kokot = new CalendarViewController(this, null, st);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
+            loader.setController(kokot);
+            Pane kokotina = new Pane();
+            kokotina = loader.load();
+
             paneCalendar.getChildren().clear();
             paneCalendar.getChildren().add(kokotina);
-        } catch (Exception ex) {
+        } catch (DALException | IOException ex) {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }    
+
+    }
 
     @FXML
     private void closeButton(ActionEvent event) {
-        Stage stage = (Stage)welcomeLabel.getScene().getWindow();
+        Stage stage = (Stage) welcomeLabel.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void attendanceButton(ActionEvent event) throws DALException {
-        if (mCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && mCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+        if (mCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && mCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
             checkAttendance();
-        else
+        } else {
             attendanceLabel.setText("Today is weekend!");
-        
+        }
+
     }
 
-    public void calculateAttendanceRate() throws DALException{   
+    public void calculateAttendanceRate() throws DALException {
         String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
-        String string = month+" - "+(int)(manager.attendanceRate(st.getId())*100)+"%";
+        String string = month + " - " + (int) (manager.attendanceRate(st.getId()) * 100) + "%";
         attendanceRate.setText(string);
     }
-    
-    public void checkAttendance() throws DALException{
-        if(manager.markAttendance(st.getId())){
+
+    public void checkAttendance() throws DALException {
+        if (manager.markAttendance(st.getId())) {
             attendanceLabel.setText("Attendance marked successfully!");
-            calculateAttendanceRate();}
-        else
+            calculateAttendanceRate();
+        } else {
             attendanceLabel.setText("Attendance already marked!");
+        }
     }
-    
-    private void fadeIn(Node node)
-    {
+
+    private void fadeIn(Node node) {
         FadeTransition exitFade = new FadeTransition(Duration.seconds(2), node);
         exitFade.setFromValue(0);
         exitFade.setToValue(1);
         exitFade.play();
     }
-    public Student getStudent(){
+
+    public Student getStudent() {
         return st;
     }
 
-    
 }

@@ -28,6 +28,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -35,6 +36,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -81,6 +83,16 @@ public class TeacherMainViewController implements Initializable {
             selectClass.setPromptText(observableClasses.get(0).getName());
             setTableView();
             loadDataToTable(FXCollections.observableArrayList(observableClasses.get(0).getStudentsList()));
+            
+            Student toCalendar = observableClasses.get(0).getStudentsList().get(0);
+            CalendarViewController kokot = new CalendarViewController(null, this, toCalendar);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
+            loader.setController(kokot);
+            Pane kokotina = new Pane();
+            kokotina = loader.load();
+            
+            calendarPane.getChildren().clear();
+            calendarPane.getChildren().add(kokotina);
         } catch (IOException ex) {
             Logger.getLogger(TeacherMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }   
