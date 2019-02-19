@@ -11,15 +11,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="324.0" style="-fx-border-color: grey; -fx-border-width: 2;" stylesheets="@../../css/attendance.automation.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.LoginViewController">
+<AnchorPane fx:id="loginWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="324.0" style="-fx-border-color: grey; -fx-border-width: 2;" stylesheets="@../../css/attendance.automation.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.LoginViewController">
    <children>
       <ImageView fx:id="pic" fitHeight="50.0" fitWidth="88.0" layoutX="118.0" layoutY="46.0" opacity="0.65" AnchorPane.bottomAnchor="256.0" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="46.0">
          <image>
             <Image url="@../../gui/images/easv-logo1.png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="loginField" alignment="CENTER" layoutX="76.0" layoutY="119.0" promptText="Login/Email" stylesheets="@../../css/attendance.automation.css" />
-      <JFXPasswordField fx:id="passwordField" alignment="CENTER" layoutX="76.0" layoutY="173.0" promptText="Password" />
+      <JFXTextField fx:id="loginField" alignment="CENTER" layoutX="93.0" layoutY="115.0" promptText="Login/Email" stylesheets="@../../css/attendance.automation.css" />
+      <JFXPasswordField fx:id="passwordField" alignment="CENTER" layoutX="95.0" layoutY="164.0" promptText="Password" />
       <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="93.0" layoutY="216.0" onAction="#loginMethod" opacity="0.91" prefHeight="37.0" prefWidth="135.0" ripplerFill="#3e1cb9" style="-fx-background-color: #569CFF;" text="Log in" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -34,6 +34,6 @@
          <font>
             <Font name="Calibri" size="15.0" />
          </font></JFXButton>
-      <JFXCheckBox fx:id="rememberUsernameCheckBox" layoutX="98.0" layoutY="264.0" text="Remember me" />
+      <JFXCheckBox fx:id="rememberUsernameCheckBox" checkedColor="#569cff" layoutX="98.0" layoutY="264.0" text="Remember me" />
    </children>
 </AnchorPane>

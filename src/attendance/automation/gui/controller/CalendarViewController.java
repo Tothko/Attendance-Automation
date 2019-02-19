@@ -61,7 +61,7 @@ public class CalendarViewController implements Initializable {
     @FXML
     private Button buttonNextMonth;
     private List<AttendanceUnit> attendance = new ArrayList();
-    private String buttonColor = "-fx-background-color: Grey -fx-font-size: 9px";
+    private String buttonColor = "-fx-background-color: Grey -fx-font-size: 13px";
     private StudentMainViewController SMWC = null;
     private TeacherMainViewController TMWC = null;
     private Student student;
@@ -91,7 +91,7 @@ public class CalendarViewController implements Initializable {
                 x = 0;
                 y++;
             }
-            if (y == 6) {
+            if (y == 7) {
                 y = 1;
             }
 //            System.out.println("Je to?" + attendance);
@@ -102,14 +102,14 @@ public class CalendarViewController implements Initializable {
 //                System.out.println("my" + (attendanceUnit.getAttendanceDate().getDate()) + "" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) + "" + ((attendanceUnit.getAttendanceDate().getYear() + 1900))));
 
                 if ((attendanceUnit.getAttendanceDate().getDate() != i) && (attendanceUnit.getAttendanceDate().getDate() <= localDate.getDayOfMonth()) && (((attendanceUnit.getAttendanceDate().getMonth() + 1) != localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()))) {
-                    buttonColor = "-fx-background-color: Red; -fx-font-size: 9px";
+                    buttonColor = "-fx-background-color: Red; -fx-font-size: 13px";
                     break;
 
                 } else if ((attendanceUnit.getAttendanceDate().getDate() == i) && (((attendanceUnit.getAttendanceDate().getMonth() + 1) == localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()))) {
-                    buttonColor = "-fx-background-color: Green; -fx-font-size: 14px";
+                    buttonColor = "-fx-background-color: Green; -fx-font-size: 13px";
                     break;
                 } else {
-                    buttonColor = "-fx-background-color: Grey; -fx-font-size: 9px";
+                    buttonColor = "-fx-background-color: Grey; -fx-font-size: 13px";
 
                 }
 
@@ -118,8 +118,8 @@ public class CalendarViewController implements Initializable {
             Button butt = new Button();
             butt.setText("" + i);
             butt.setStyle(buttonColor);
-            butt.setMinSize(35, 35);
-            butt.setMaxSize(35, 35);
+            butt.setMinSize(36, 36);
+            butt.setMaxSize(36, 36);
             butt.setOnAction(new EventHandler<ActionEvent>() {
 
                 @Override
@@ -156,7 +156,6 @@ public class CalendarViewController implements Initializable {
     public void loadDaysLabel() {
         GridCalendar.add(monday, 0, 0);
         monday.setText("Mo");
-       // monday.getText().
         GridCalendar.add(tuesday, 1, 0);
         tuesday.setText("Tu");
         GridCalendar.add(wednesday, 2, 0);

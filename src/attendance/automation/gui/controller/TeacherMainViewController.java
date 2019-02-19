@@ -35,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -155,6 +156,23 @@ public class TeacherMainViewController implements Initializable {
         exitFade.setFromValue(0);
         exitFade.setToValue(1);
         exitFade.play();
+    }
+
+    @FXML
+    private void selectStudent(MouseEvent event) throws IOException {
+    Student selectedStudentCalendar = tableView.getSelectionModel().getSelectedItem().getValue();
+    
+    
+    //Student toCalendar = observableClasses.get(0).getStudentsList().get(0);
+            CalendarViewController kokot = new CalendarViewController(null, this, selectedStudentCalendar);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
+            loader.setController(kokot);
+            Pane kokotina = new Pane();
+            kokotina = loader.load();
+            
+            calendarPane.getChildren().clear();
+            calendarPane.getChildren().add(kokotina);
+    
     }
     
 }
