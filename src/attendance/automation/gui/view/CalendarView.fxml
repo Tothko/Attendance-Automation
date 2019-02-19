@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="448.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="448.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/attendance/automation/css/calendar.css" />
     </stylesheets>
@@ -34,41 +34,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="monday" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mo" textAlignment="CENTER">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="tuesday" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tu" textAlignment="CENTER" GridPane.columnIndex="1">
-               <font>
-                  <Font name="Calibri" size="19.0" />
-               </font>
-            </Label>
-            <Label fx:id="wednesday" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="We" textAlignment="CENTER" GridPane.columnIndex="2">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="thursday" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Th" textAlignment="CENTER" GridPane.columnIndex="3">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="friday" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fr" textAlignment="CENTER" GridPane.columnIndex="4">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="saturday" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sa" textAlignment="CENTER" GridPane.columnIndex="5">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="sunday" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Su" textAlignment="CENTER" GridPane.columnIndex="6">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Label>
             <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="8.0" prefWidth="0.0" style="-fx-background-size: 2; -fx-background-color: BLACK;" GridPane.rowIndex="1" />
          </children>
       </GridPane>

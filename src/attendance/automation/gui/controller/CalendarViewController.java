@@ -7,20 +7,27 @@ package attendance.automation.gui.controller;
 
 import attendance.automation.be.AttendanceUnit;
 import attendance.automation.be.Student;
-import attendance.automation.be.Teacher;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import com.jfoenix.controls.JFXButton;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -37,31 +44,22 @@ public class CalendarViewController implements Initializable {
     private GridPane GridCalendar;
     @FXML
     private Label labelDate;
-    @FXML
     private Label monday;
-    @FXML
     private Label tuesday;
-    @FXML
     private Label wednesday;
-    @FXML
     private Label thursday;
-    @FXML
     private Label friday;
-    @FXML
     private Label saturday;
-    @FXML
     private Label sunday;
 
     private Date date = new Date();
     private int x;
     private int y;
-    private LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    @FXML
-    private Button buttonPreviousMonth;
-    @FXML
-    private Button buttonNextMonth;
-    private List<AttendanceUnit> attendance = new ArrayList();
-    private String buttonColor = "-fx-background-color: Grey -fx-font-size: 13px";
+    private Calendar calendar;
+    private Calendar today;
+    private List<AttendanceUnit> attendance = new ArrayList<>();
+    private List<Date> dateList = new ArrayList<>();
+    private String buttonColor;
     private StudentMainViewController SMWC = null;
     private TeacherMainViewController TMWC = null;
     private Student student;
@@ -75,46 +73,112 @@ public class CalendarViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        calendar = Calendar.getInstance();
+        today = (Calendar) calendar.clone();
         attendance = student.getAttendance();
+        attendanceUnitToCalendarList();
+        setMonthlyCalendar(calendar);
+        
+       
+    }
 
-        y = 1;
-        this.url = url;
-        this.rb = rb;
-        labelDate.setText(localDate.getMonth() + "/" + localDate.getYear());
-        String someDay = (localDate.minusDays(localDate.getDayOfMonth() - 1)).getDayOfWeek().toString();
-        x = localDate.getDayOfWeek().getValue() - 1;
+    @FXML
+    private void pressButtonPreviousMonth(ActionEvent event) {
+        GridCalendar.getChildren().clear();
+        calendar.add(Calendar.MONTH, -1);
+        setMonthlyCalendar(calendar);
+    }
 
-        for (int i = 1; i <= localDate.lengthOfMonth(); ++i) {
-            (localDate.minusDays(localDate.getDayOfMonth())).getDayOfWeek();
+    @FXML
+    private void pressButtonNextMonth(ActionEvent event) {
+        GridCalendar.getChildren().clear();
+        calendar.add(Calendar.MONTH, 1);
+        setMonthlyCalendar(calendar);
+    }
 
-            if (x == 7) {
-                x = 0;
-                y++;
+    public void setStudent(Student student) {
+        this.student = student;
+
+    }
+
+    public void loadDaysLabel() {
+        monday = new Label();
+        GridCalendar.add(monday, 0, 0);
+        monday.setText("Mo");
+        tuesday = new Label();
+        GridCalendar.add(tuesday, 1, 0);
+        tuesday.setText("Tu");
+        wednesday = new Label();
+        GridCalendar.add(wednesday, 2, 0);
+        wednesday.setText("We");
+        thursday = new Label();
+        GridCalendar.add(thursday, 3, 0);
+        thursday.setText("Th");
+        friday = new Label();
+        GridCalendar.add(friday, 4, 0);
+        friday.setText("Fr");
+        saturday = new Label();
+        GridCalendar.add(saturday, 5, 0);
+        saturday.setText("Sa");
+        sunday = new Label();
+        GridCalendar.add(sunday, 6, 0);
+        sunday.setText("Su");
+        
+
+    }
+    
+    public void attendanceUnitToCalendarList(){
+        for (AttendanceUnit attendanceUnit : attendance) {
+            System.out.println(attendanceUnit.getAttendanceDate());
+            dateList.add(attendanceUnit.getAttendanceDate());
+        }
+    
+    }
+    
+    public void setMonthlyCalendar(Calendar cal2) {
+        
+    Calendar cal = (Calendar) cal2.clone();
+    labelDate.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + "/" + cal.get(Calendar.YEAR));
+    loadDaysLabel();
+    
+    cal.set(Calendar.DAY_OF_MONTH, 1);
+    int daysInTheMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        
+    int z = cal.get(Calendar.DAY_OF_WEEK);
+    if(z==1)
+            x=6;
+        else
+            x=z-2;
+    
+    y=1;
+    for(int i = 1; i <= daysInTheMonth; ++i){
+        
+    
+        if(x==7){
+         x=0;
+         y++;
+        }
+            
+            if(checkDateList(cal.get(Calendar.DAY_OF_MONTH),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR))){
+                buttonColor = "-fx-background-color: Green; -fx-font-size: 13px";
+                addButton(x,y,i);
             }
-            if (y == 7) {
-                y = 1;
+            else if (cal.get(Calendar.DAY_OF_WEEK)!= Calendar.SUNDAY && cal.get(Calendar.DAY_OF_WEEK)!= Calendar.SATURDAY && cal.before(today)){
+                buttonColor = "-fx-background-color: Red; -fx-font-size: 13px";
+                addButton(x,y,i);
             }
-//            System.out.println("Je to?" + attendance);
-            for (AttendanceUnit attendanceUnit : attendance) {
-//                System.out.println("GetDay" + ((attendanceUnit.getAttendanceDate().getDate()) == i));
-//                System.out.println("GetMonth" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) == localDate.getMonthValue()));
-//                System.out.println("GetYear" + ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()));
-//                System.out.println("my" + (attendanceUnit.getAttendanceDate().getDate()) + "" + ((attendanceUnit.getAttendanceDate().getMonth() + 1) + "" + ((attendanceUnit.getAttendanceDate().getYear() + 1900))));
-
-                if ((attendanceUnit.getAttendanceDate().getDate() != i) && (attendanceUnit.getAttendanceDate().getDate() <= localDate.getDayOfMonth()) && (((attendanceUnit.getAttendanceDate().getMonth() + 1) != localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()))) {
-                    buttonColor = "-fx-background-color: Red; -fx-font-size: 13px";
-                    break;
-
-                } else if ((attendanceUnit.getAttendanceDate().getDate() == i) && (((attendanceUnit.getAttendanceDate().getMonth() + 1) == localDate.getMonthValue()) && ((attendanceUnit.getAttendanceDate().getYear() + 1900) == localDate.getYear()))) {
-                    buttonColor = "-fx-background-color: Green; -fx-font-size: 13px";
-                    break;
-                } else {
-                    buttonColor = "-fx-background-color: Grey; -fx-font-size: 13px";
-
-                }
-
+            else{
+                buttonColor = "-fx-background-color: Grey; -fx-font-size: 13px";
+                addButton(x,y,i);
             }
-
+        
+    
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+            x++;
+        }
+    }
+    
+    public void addButton(int x, int y, int i){
             Button butt = new Button();
             butt.setText("" + i);
             butt.setStyle(buttonColor);
@@ -124,51 +188,19 @@ public class CalendarViewController implements Initializable {
 
                 @Override
                 public void handle(ActionEvent e) {
-                    // TO DO CODE
+                    
                 }
             });
             GridCalendar.add(butt, x, y);
-            x++;
+    }
+    public boolean checkDateList(int day, int month, int year){
+        Date date2 = new GregorianCalendar(year, month, day).getTime();
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date2);
+        for (Date date : dateList) {
+            if(date.equals(date2))
+                    return true;
         }
-    }
-
-    @FXML
-    private void pressButtonPreviousMonth(ActionEvent event) {
-        localDate = localDate.minusMonths(1);
-        GridCalendar.getChildren().clear();
-        initialize(url, rb);
-        loadDaysLabel();
-    }
-
-    @FXML
-    private void pressButtonNextMonth(ActionEvent event) {
-        localDate = localDate.plusMonths(1);
-        GridCalendar.getChildren().clear();
-        initialize(url, rb);
-        loadDaysLabel();
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-
-    }
-
-    public void loadDaysLabel() {
-        GridCalendar.add(monday, 0, 0);
-        monday.setText("Mo");
-        GridCalendar.add(tuesday, 1, 0);
-        tuesday.setText("Tu");
-        GridCalendar.add(wednesday, 2, 0);
-        wednesday.setText("We");
-        GridCalendar.add(thursday, 3, 0);
-        thursday.setText("Th");
-        GridCalendar.add(friday, 4, 0);
-        friday.setText("Fr");
-        GridCalendar.add(saturday, 5, 0);
-        saturday.setText("Sa");
-        GridCalendar.add(sunday, 6, 0);
-        sunday.setText("Su");
-
+        return false;
     }
 
 }
