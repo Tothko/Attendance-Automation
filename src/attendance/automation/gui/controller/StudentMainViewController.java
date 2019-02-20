@@ -62,7 +62,9 @@ public class StudentMainViewController implements Initializable {
     @FXML
     private AnchorPane paneCalendar;
 
-    ;
+    
+    @FXML
+    private JFXButton btnMinimize;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -137,6 +139,12 @@ public class StudentMainViewController implements Initializable {
 
             paneCalendar.getChildren().clear();
             paneCalendar.getChildren().add(kokotina);
+    }
+
+    @FXML
+    private void minimizeButton(ActionEvent event) {
+        Stage stage = (Stage)welcomeLabel.getScene().getWindow();
+        stage.setIconified(true);
     }
 
 }

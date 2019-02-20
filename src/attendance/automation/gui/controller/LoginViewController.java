@@ -63,6 +63,8 @@ public class LoginViewController implements Initializable {
     private CheckBox rememberUsernameCheckBox;
     
     Preferences preferences;
+    @FXML
+    private JFXButton btnMinimize;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -235,6 +237,12 @@ public class LoginViewController implements Initializable {
                 stage.setY(event.getScreenY() - yOffset);
             }
         });
+    }
+
+    @FXML
+    private void minimizeButton(ActionEvent event) {
+        Stage stage = (Stage)loginField.getScene().getWindow();
+        stage.setIconified(true);
     }
     
 }

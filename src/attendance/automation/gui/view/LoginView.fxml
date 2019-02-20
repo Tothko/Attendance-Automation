@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="324.0" style="-fx-border-color: grey; -fx-border-width: 2;" stylesheets="@../../css/attendance.automation.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.LoginViewController">
+<AnchorPane fx:id="loginWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="324.0" style="-fx-border-color: grey; -fx-border-width: 3;" stylesheets="@../../css/attendance.automation.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.automation.gui.controller.LoginViewController">
    <children>
       <ImageView fx:id="pic" fitHeight="50.0" fitWidth="88.0" layoutX="118.0" layoutY="46.0" opacity="0.65" AnchorPane.bottomAnchor="256.0" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="46.0">
          <image>
@@ -35,5 +35,6 @@
             <Font name="Calibri" size="15.0" />
          </font></JFXButton>
       <JFXCheckBox fx:id="rememberUsernameCheckBox" checkedColor="#569cff" layoutX="98.0" layoutY="264.0" text="Remember me" />
+      <JFXButton fx:id="btnMinimize" layoutX="262.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#minimizeButton" prefHeight="21.0" prefWidth="21.0" ripplerFill="#16a101" style="-fx-background-color: #65d355; -fx-background-radius: 36;" text=" " />
    </children>
 </AnchorPane>
