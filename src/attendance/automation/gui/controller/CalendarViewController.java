@@ -28,6 +28,7 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -57,6 +58,7 @@ public class CalendarViewController implements Initializable {
     private int y;
     private Calendar calendar;
     private Calendar today;
+    private Calendar firstDay;
     private List<AttendanceUnit> attendance = new ArrayList<>();
     private List<Date> dateList = new ArrayList<>();
     private String buttonColor;
@@ -75,6 +77,8 @@ public class CalendarViewController implements Initializable {
 
         calendar = Calendar.getInstance();
         today = (Calendar) calendar.clone();
+        firstDay = (Calendar) calendar.clone();
+        firstDay.setTime(student.getAttendance().get(0).getAttendanceDate());
         attendance = student.getAttendance();
         attendanceUnitToCalendarList();
         setMonthlyCalendar(calendar);
@@ -136,9 +140,10 @@ public class CalendarViewController implements Initializable {
     }
     
     public void setMonthlyCalendar(Calendar cal2) {
-        
+    double redButtons = 0;
+    double greenButtons = 0;
+    
     Calendar cal = (Calendar) cal2.clone();
-    labelDate.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + "/" + cal.get(Calendar.YEAR));
     loadDaysLabel();
     
     cal.set(Calendar.DAY_OF_MONTH, 1);
@@ -160,15 +165,17 @@ public class CalendarViewController implements Initializable {
         }
             
             if(checkDateList(cal.get(Calendar.DAY_OF_MONTH),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR))){
-                buttonColor = "-fx-background-color: Green; -fx-font-size: 13px";
+                buttonColor = "-fx-background-color: Green; -fx-font-size: 13px; -fx-background-radius: 0";
                 addButton(x,y,i);
+                greenButtons++;
             }
-            else if (cal.get(Calendar.DAY_OF_WEEK)!= Calendar.SUNDAY && cal.get(Calendar.DAY_OF_WEEK)!= Calendar.SATURDAY && cal.before(today)){
-                buttonColor = "-fx-background-color: Red; -fx-font-size: 13px";
+            else if (cal.get(Calendar.DAY_OF_WEEK)!= Calendar.SUNDAY && cal.get(Calendar.DAY_OF_WEEK)!= Calendar.SATURDAY && cal.before(today) && cal.after(firstDay)){
+                buttonColor = "-fx-background-color: Red; -fx-font-size: 13px; -fx-background-radius: 0";
                 addButton(x,y,i);
+                redButtons++;
             }
             else{
-                buttonColor = "-fx-background-color: Grey; -fx-font-size: 13px";
+                buttonColor = "-fx-background-color: Grey; -fx-font-size: 13px; -fx-background-radius: 0";
                 addButton(x,y,i);
             }
         
@@ -176,10 +183,12 @@ public class CalendarViewController implements Initializable {
             cal.add(Calendar.DAY_OF_MONTH, 1);
             x++;
         }
+    labelDate.setText(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + "/" + cal.get(Calendar.YEAR)+" <"+(int)((greenButtons/(greenButtons+redButtons))*100)+"%>");
+    labelDate.setAlignment(Pos.TOP_RIGHT);
     }
     
     public void addButton(int x, int y, int i){
-            Button butt = new Button();
+            JFXButton butt = new JFXButton();
             butt.setText("" + i);
             butt.setStyle(buttonColor);
             butt.setMinSize(36, 36);
@@ -188,7 +197,6 @@ public class CalendarViewController implements Initializable {
 
                 @Override
                 public void handle(ActionEvent e) {
-                    
                 }
             });
             GridCalendar.add(butt, x, y);

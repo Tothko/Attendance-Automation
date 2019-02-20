@@ -58,6 +58,7 @@ public class StudentMainViewController implements Initializable {
     private JFXButton btnLogin;
     private double xOffset = 0;
     private double yOffset = 0;
+    private FXMLLoader loader;
     @FXML
     private AnchorPane paneCalendar;
 
@@ -70,20 +71,13 @@ public class StudentMainViewController implements Initializable {
             manager = AAManager.getInstance();
             st = manager.getStudent();
             welcomeLabel.setText("Welcome " + st.getName());
-            mCalendar = Calendar.getInstance();
+            if(st.getAttendance().size()>0)
             calculateAttendanceRate();
 
             fadeIn(btnExit);
             fadeIn(btnLogin);
 
-            CalendarViewController kokot = new CalendarViewController(this, null, st);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
-            loader.setController(kokot);
-            Pane kokotina = new Pane();
-            kokotina = loader.load();
-
-            paneCalendar.getChildren().clear();
-            paneCalendar.getChildren().add(kokotina);
+            loadCalendar();
         } catch (DALException | IOException ex) {
             Logger.getLogger(StudentMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,7 +91,7 @@ public class StudentMainViewController implements Initializable {
     }
 
     @FXML
-    private void attendanceButton(ActionEvent event) throws DALException {
+    private void attendanceButton(ActionEvent event) throws DALException, SQLException, IOException {
         if (mCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && mCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
             checkAttendance();
         } else {
@@ -107,15 +101,18 @@ public class StudentMainViewController implements Initializable {
     }
 
     public void calculateAttendanceRate() throws DALException {
-        String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
-        String string = month + " - " + (int) (manager.attendanceRate(st.getId()) * 100) + "%";
+        String string = "Total attendance " + (int) (manager.attendanceRate(st) * 100) + "%";
         attendanceRate.setText(string);
     }
 
-    public void checkAttendance() throws DALException {
+    public void checkAttendance() throws DALException, SQLException, IOException {
         if (manager.markAttendance(st.getId())) {
             attendanceLabel.setText("Attendance marked successfully!");
             calculateAttendanceRate();
+            manager.setStudent(st.getId());
+            manager.setUser();
+            st = manager.getStudent();
+            loadCalendar();
         } else {
             attendanceLabel.setText("Attendance already marked!");
         }
@@ -130,6 +127,16 @@ public class StudentMainViewController implements Initializable {
 
     public Student getStudent() {
         return st;
+    }
+    public void loadCalendar() throws IOException{
+            CalendarViewController kokot = new CalendarViewController(this, null, st);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/CalendarView.fxml"));
+            loader.setController(kokot);
+            Pane kokotina = new Pane();
+            kokotina = loader.load();
+
+            paneCalendar.getChildren().clear();
+            paneCalendar.getChildren().add(kokotina);
     }
 
 }

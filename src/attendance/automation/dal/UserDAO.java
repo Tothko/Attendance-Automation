@@ -69,6 +69,25 @@ public class UserDAO {
   public Teacher getTeacher(){
       return te;
   }
+  public void setStudent(int studentID) throws DALException, SQLException, IOException{
+      
+         Connection con = cp.getConnection();
+         Statement statement = con.createStatement();
+         ResultSet rs = statement.executeQuery("SELECT * FROM Student WHERE ID="+studentID);
+         
+         while (rs.next()) {
+         String name = rs.getString("UserName");
+         int id = rs.getInt("ID");
+         int classNum = rs.getInt("ClassNum");
+         st = new Student(name,classNum,id);
+         }
+         this.st=st;
+}
+  
+                
+  
+  
+  
   
     }
 

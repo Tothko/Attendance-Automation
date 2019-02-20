@@ -5,6 +5,7 @@
  */
 package attendance.automation.bll;
 
+import attendance.automation.be.AttendanceUnit;
 import attendance.automation.be.Student;
 import attendance.automation.be.Teacher;
 import attendance.automation.dal.DALException;
@@ -60,7 +61,9 @@ public class AAManager {
             return true;
     
     }
-    
+    public void setStudent(int studentID) throws DALException, SQLException, IOException{
+        ud.setStudent(studentID);
+    }
     public Student getStudent(){
         return st;
     }
@@ -72,17 +75,22 @@ public class AAManager {
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return dd.markAttendance(studentID, date);
     }
-    public double attendanceRate(int studentID) throws DALException{
+    public double attendanceRate(Student student) throws DALException{
         double schoolDays = 0;
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        c1.set(Calendar.DAY_OF_MONTH, 1);
-        while(c1.before(c2)||c1.equals(c2)){
-            if(c1.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && c1.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
-                schoolDays++;
-            c1.add(Calendar.DAY_OF_MONTH, 1);
+        for (AttendanceUnit attendanceUnit : student.getAttendance()) {
+            System.out.println(attendanceUnit.getAttendanceDate().toString());
         }
-        return dd.getAttendancesForThisMonth(studentID)/schoolDays;
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = (Calendar) c1.clone();
+        Date date = student.getAttendance().get(0).getAttendanceDate();
+        c2.setTime(date);
+        while(c2.before(c1)||c2.equals(c1)){
+            if(c2.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && c2.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+                schoolDays++;
+            c2.add(Calendar.DATE, 1);
+        }
+        System.out.println(schoolDays);
+        return dd.getAttendancesForThisMonth(student.getId())/schoolDays;
     }
     
 }

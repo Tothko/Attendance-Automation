@@ -52,7 +52,7 @@ public class Student extends RecursiveTreeObject<Student>{
     try{
         Connection con = cp.getConnection();
         Statement statement = con.createStatement();
-        String str = "SELECT * FROM Student, StudentAttendance WHERE Student.ID=StudentID AND UserName='"+name+"'";
+        String str = "SELECT * FROM Student, StudentAttendance WHERE Student.ID=StudentID AND UserName='"+name+"' ORDER BY Date ASC";
         ResultSet rs = statement.executeQuery(str);
         while(rs.next()){
              Date date1 = rs.getDate("Date");
@@ -67,7 +67,7 @@ public class Student extends RecursiveTreeObject<Student>{
     }
 
     public void setAttendanceOfStudent() throws DALException {
-        attendanceOfStudent = Integer.toString((int)(manager.attendanceRate(id)*100))+"%";
+        attendanceOfStudent = Integer.toString((int)(manager.attendanceRate(this)*100))+"%";
                 
     }
     

@@ -75,7 +75,7 @@ public class DateDAO {
             Connection con = cp.getConnection();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
             Date date = new Date();
-            String string = "Select * From StudentAttendance Where StudentID="+studentID+" AND Date like '"+dateFormat.format(date)+"%'";
+            String string = "Select * From StudentAttendance Where StudentID="+studentID;
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(string);
             while(rs.next()){
