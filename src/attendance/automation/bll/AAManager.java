@@ -93,4 +93,8 @@ public class AAManager {
         return dd.getAttendancesForThisMonth(student.getId())/schoolDays;
     }
     
+    public void changeAttendance(int studentID, Date date, String distinguisher){
+    dd.changeAttendance(studentID, date, distinguisher);
+    }
+    
 }
