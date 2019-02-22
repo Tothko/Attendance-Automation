@@ -5,7 +5,7 @@
  */
 package attendance.automation.gui.controller;
 
-import attendance.automation.be.Class;
+import attendance.automation.be.Classroom;
 import attendance.automation.be.Student;
 import attendance.automation.be.Teacher;
 import attendance.automation.bll.AAManager;
@@ -53,15 +53,15 @@ public class TeacherMainViewController implements Initializable {
     @FXML
     private AnchorPane calendarPane;
     @FXML
-    private JFXComboBox<Class> selectClass;
+    private JFXComboBox<Classroom> selectClass;
     @FXML
     private JFXTextField studentSearch;
     @FXML
     private JFXTreeTableView<Student> tableView;
     private Teacher te;
     private AAManager manager;
-    private List<Class> listOfClasses;
-    private ObservableList<Class> observableClasses;
+    private List<Classroom> listOfClasses;
+    private ObservableList<Classroom> observableClasses;
     @FXML
     private JFXButton btnExit;
     @FXML

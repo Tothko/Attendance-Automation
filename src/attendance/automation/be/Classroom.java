@@ -21,13 +21,13 @@ import java.util.logging.Logger;
  *
  * @author Revy
  */
-public class Class {
+public class Classroom {
     private String name;
     private int id;
     private final List<Student> listOfStudents;
     private final ConnectionProvider cp;
     
-    public Class(String name, int id) throws IOException, DALException{
+    public Classroom(String name, int id) throws IOException, DALException{
         this.name=name;
         this.id=id;
         listOfStudents= new ArrayList<>();

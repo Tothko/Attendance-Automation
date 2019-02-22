@@ -22,7 +22,7 @@ import java.util.List;
 public class Teacher {
     private String name;
     private int id;
-    private List<Class> listOfClasses;
+    private List<Classroom> listOfClasses;
     private final ConnectionProvider cp;
     
     public Teacher(String name, int id) throws IOException, DALException{
@@ -44,7 +44,7 @@ public class Teacher {
              String name1 = rs.getString("ClassName");
              System.out.println(name1);
              int number = rs.getInt("ID");
-             listOfClasses.add(new Class(name1,number));}
+             listOfClasses.add(new Classroom(name1,number));}
         }
         
         catch (SQLException ex) {
@@ -71,10 +71,10 @@ public class Teacher {
         this.id = id;
     }
     
-    public void setClassesList(List<Class> list){
+    public void setClassesList(List<Classroom> list){
         listOfClasses.addAll(list);
     }
-    public List<Class> getClassesList(){
+    public List<Classroom> getClassesList(){
          return listOfClasses;
     }
 }
