@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -46,7 +47,7 @@ import javafx.util.Duration;
  * @author Tothko
  */
 public class LoginViewController implements Initializable {
-    
+
     @FXML
     private TextField loginField;
     @FXML
@@ -65,57 +66,80 @@ public class LoginViewController implements Initializable {
     private AnchorPane loginWindow;
     @FXML
     private CheckBox rememberUsernameCheckBox;
-    
+
     Preferences preferences;
     @FXML
     private JFXButton btnMinimize;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       rememberPassword();
+        rememberPassword();
         try {
             manager = AAManager.getInstance();
         } catch (IOException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         fadeIn(btnExit);
         fadeIn(btnLogin);
         fadeIn(pic);
-        
+
     }
-    
+
     @FXML
     private void closeWindow(ActionEvent event) {
         System.exit(0);
     }
-    
-    
-    
+
     @FXML
     private void loginMethod(ActionEvent event) throws DALException, IOException, InterruptedException, BackingStoreException {
-        String login = loginField.getText();
-        String password = passwordField.getText();
-        login(login, password);
-        
+
+        System.out.println("Halo");
+
+        Runnable runnable = new myThread();
+        Thread thread = new Thread(runnable);
+        thread.start();
+
     }
-    
-    private void rememberPassword(){
-     preferences = Preferences.userNodeForPackage(LoginViewController.class);
-        
+
+    public class myThread implements Runnable {
+
+        @Override
+        public void run() {
+
+            Platform.runLater(()
+                   -> {
+                try {
+                    String login = loginField.getText();
+                    String password = passwordField.getText();
+                    login(login, password);
+                } catch (DALException ex) {
+                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (BackingStoreException ex) {
+                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+
+        }
+    }
+
+    private void rememberPassword() {
+        preferences = Preferences.userNodeForPackage(LoginViewController.class);
+
         if (preferences != null) {
-            
+
             if (preferences.get("loginField", null) != null || preferences.get("loginPassword", null) != null) {
                 loginField.setText(preferences.get("loginField", null));
                 passwordField.setText(preferences.get("passwordField", null));
                 rememberUsernameCheckBox.setSelected(true);
-            } 
-            else if (preferences.get("loginField", null) == null || preferences.get("loginPassword", null) == null) {
+            } else if (preferences.get("loginField", null) == null || preferences.get("loginPassword", null) == null) {
                 rememberUsernameCheckBox.setSelected(false);
             }
         }
     }
-    
+
     private void login(String login, String password) throws DALException, IOException, BackingStoreException {
         if (manager.checkLogin(login, password)) {
             manager.setUser();
@@ -133,7 +157,7 @@ public class LoginViewController implements Initializable {
                 String path = "/attendance/automation/gui/view/TeacherMainView.fxml";
                 openWindow(path);
             }
-            
+
             Stage stage2 = (Stage) loginField.getScene().getWindow();
             stage2.close();
         } else {
@@ -141,24 +165,24 @@ public class LoginViewController implements Initializable {
             a.showAndWait();
         }
     }
-    
+
     @FXML
     private void loginStudent(ActionEvent event) throws DALException, IOException, BackingStoreException {
         login("JanToth", "1234");
     }
-    
+
     @FXML
     private void loginTeacher(ActionEvent event) throws DALException, IOException, BackingStoreException {
         login("MarekStancik", "cplusplus");
     }
-    
+
     private void fadeIn(Node node) {
         FadeTransition exitFade = new FadeTransition(Duration.seconds(2), node);
         exitFade.setFromValue(0);
         exitFade.setToValue(1);
         exitFade.play();
     }
-    
+
     @FXML
     private void forgotPasswordButt(ActionEvent event) throws IOException {
         String path = "/attendance/automation/gui/view/ForgotPasswordView.fxml";
@@ -167,44 +191,39 @@ public class LoginViewController implements Initializable {
 
     @FXML
     private void minimizeButton(ActionEvent event) {
-        Stage stage = (Stage)loginField.getScene().getWindow();
+        Stage stage = (Stage) loginField.getScene().getWindow();
         stage.setIconified(true);
     }
 
     @FXML
-    private void enterNext(KeyEvent event)
-    {
-        if (event.getCode() == KeyCode.ENTER)
-        {
+    private void enterNext(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
             passwordField.requestFocus();
         }
     }
 
     @FXML
-    private void enterLogIn(KeyEvent event) throws DALException, IOException, BackingStoreException
-    {
-        if (event.getCode() == KeyCode.ENTER)
-        {
+    private void enterLogIn(KeyEvent event) throws DALException, IOException, BackingStoreException {
+        if (event.getCode() == KeyCode.ENTER) {
             String login = loginField.getText();
             String password = passwordField.getText();
             login(login, password);
         }
     }
-    
-    private void openWindow(String path) throws IOException
-    {
+
+    private void openWindow(String path) throws IOException {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
         root1 = (Parent) fxmlLoader.load();
         Stage stage = (Stage) loginWindow.getScene().getWindow();
         stage.close();
-        
+
         Stage stage2 = new Stage();
         stage2.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root1);
         stage2.setScene(scene);
         stage2.show();
-        
+
         root1.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -220,5 +239,5 @@ public class LoginViewController implements Initializable {
             }
         });
     }
-    
+
 }
